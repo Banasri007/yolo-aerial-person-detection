@@ -21,7 +21,7 @@ Key characteristics of the dataset:
 
 These characteristics make VisDrone one of the **most challenging benchmarks for human detection**.
 
-Dataset reference:
+**Dataset reference:**
 https://github.com/VisDrone/VisDrone-Dataset
 
 ---
@@ -88,3 +88,4 @@ Despite these challenges, the model demonstrates effective performance on small-
 
 ## Author
 Javvaji Aditya Banasri
+
