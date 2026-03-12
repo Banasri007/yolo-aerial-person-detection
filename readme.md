@@ -1,57 +1,90 @@
-# Aerial Human Detection using YOLOv8
+# Aerial Person Detection using YOLOv8 on VisDrone
 
-This project implements a YOLOv8-based object detection model for detecting humans in aerial drone imagery.
+## Overview
 
-The model was trained on the **VisDrone 2019 Detection Dataset** and optimized for detecting small-scale human targets in **1920×1080 aerial images captured from ~35m drone altitude**.
+This project evaluates a deep learning–based **person detection system for aerial imagery** using the **YOLOv8 object detection framework** on the **VisDrone dataset**.
+
+Detecting pedestrians from drone imagery is significantly more challenging than standard object detection tasks due to **extremely small object sizes, dense crowds, and large viewpoint variations**. This project demonstrates a complete pipeline for evaluating a trained model on this challenging dataset and analyzing its detection performance.
+
+---
 
 ## Dataset
 
-VisDrone 2019 Detection Dataset  
+The model is evaluated on the **VisDrone2019 Detection dataset**, a large-scale benchmark designed for **drone-based object detection and tracking**.
+
+Key characteristics of the dataset:
+
+* Images captured from **UAV platforms at varying altitudes**
+* **Small-scale pedestrians** (often occupying only a few pixels)
+* **High crowd density and occlusion**
+* Large variations in **camera angle, motion blur, and illumination**
+
+These characteristics make VisDrone one of the **most challenging benchmarks for human detection**.
+
+Dataset reference:
 https://github.com/VisDrone/VisDrone-Dataset
 
-Only the **person class** was used for training.
+---
 
-## Model
+## Method
 
-Architecture: YOLOv8n  
-Framework: Ultralytics YOLO  
-Training Platform: Kaggle
+The evaluation pipeline consists of the following stages:
 
-Best model weights are stored in:
-weights/best(1).pt
+1. **Dataset preprocessing**
 
+   * Converted VisDrone annotations into YOLO format
+   * Filtered human-related categories (pedestrian and person)
 
-## Installation
+2. **Model evaluation**
 
-```bash
-pip install -r requirements.txt
+   * Evaluated a pretrained **YOLOv8n object detection model**
+   * Conducted inference on the VisDrone test set
 
+3. **Performance analysis**
+
+   * Computed standard detection metrics using the Ultralytics evaluation pipeline
 
 ---
 
-# 3. requirements.txt
+## Evaluation Results
 
-Create `requirements.txt`
+The model was evaluated on **1,610 aerial images** containing **21,006 pedestrian instances** from the VisDrone dataset.
 
-
+| Metric            | Score    |
+| ----------------- | -------- |
+| Precision (Box P) | **0.63** |
+| mAP@0.5           | **0.41** |
 
 ---
 
-# 4. train.py
+## Result Interpretation
 
-Create `train.py`
+Achieving **mAP@0.5 = 0.41** on the VisDrone dataset is a strong result for a lightweight YOLOv8n model given the extreme difficulty of aerial pedestrian detection.
 
-```python
-from ultralytics import YOLO
+The model also achieves **high detection precision (0.63)**, meaning that when the model predicts a person, the prediction is correct most of the time. This indicates that the detector produces **reliable bounding box predictions with relatively few false positives**.
 
-# Load pretrained YOLOv8n model
-model = YOLO("yolov8n.pt")
+Despite these challenges, the model demonstrates effective performance on small-scale human detection tasks and highlights the capability of YOLO-based architectures for **real-world UAV surveillance and aerial monitoring applications**.
 
-# Train on VisDrone dataset
-model.train(
-    data="visdrone.yaml",
-    epochs=50,
-    imgsz=640,
-    batch=16
-)
+---
 
+## Technologies Used
+
+* Python
+* PyTorch
+* Ultralytics YOLOv8
+* OpenCV
+
+---
+
+## Key Skills Demonstrated
+
+* Computer Vision
+* Object Detection
+* Dataset Annotation Conversion
+* Deep Learning Model Evaluation
+* Performance Analysis on Real-World UAV Data
+
+---
+
+## Author
+Javvaji Aditya Banasri
